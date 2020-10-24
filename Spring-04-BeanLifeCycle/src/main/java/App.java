@@ -15,8 +15,6 @@ public class App {
 
         ((ClassPathXmlApplicationContext)container).close();
 
-
-
     }
 
 
