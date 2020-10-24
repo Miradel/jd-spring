@@ -17,6 +17,20 @@ public class App {
         course2.getTeachingHours();
 
 
+        Course course3 = container.getBean("api",Course.class);
+        course3.getTeachingHours();
+
+        Course course4 = container.getBean("html",Course.class);
+        course4.getTeachingHours();
+
+        Course course5 = container.getBean("api",Course.class);
+        System.out.println(course5.toString());
+
+
+
+
+
+
 
 
     }
