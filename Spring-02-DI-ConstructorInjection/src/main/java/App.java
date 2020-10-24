@@ -11,6 +11,7 @@ public class App {
         Course course = container.getBean("java",Course.class);
         course.getTeachingHours();
 
+
     }
 
 
