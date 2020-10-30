@@ -1,6 +1,7 @@
 package services;
 
 import interfaces.Course;
+import interfaces.ExtraSesstions;
 import org.springframework.beans.factory.annotation.Value;
 
 import java.util.Arrays;
@@ -29,5 +30,11 @@ public class Api implements Course {
                 ", instructor='" + instructor + '\'' +
                 ", days=" + Arrays.toString(days) +
                 '}';
+    }
+
+    private ExtraSesstions extraSesstions;
+
+    public Api(ExtraSesstions extraSesstions) {
+        this.extraSesstions = extraSesstions;
     }
 }
