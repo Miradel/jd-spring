@@ -1,5 +1,6 @@
 package com.cybertek.controller;
 
+import com.cybertek.model.Employee;
 import com.cybertek.model.Mentor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,7 +28,7 @@ public class MentorController {
     }
 
     @PostMapping("/confirm")
-    public String submitForm(@ModelAttribute("mentor") Mentor mentor){
+    public String submitForm(@ModelAttribute("mentor")  Mentor mentor){
         System.out.println(mentor.toString());
         return "mentor/mentor-confirmation";
     }
