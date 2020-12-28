@@ -6,6 +6,7 @@ import com.cinemalab.enums.MovieType;
 import com.cinemalab.enums.UserRole;
 import com.cinemalab.repoaitory.*;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -13,6 +14,7 @@ import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
+//@Component
 public class DataGenerator implements CommandLineRunner {
     private final MovieRepository movieRepository;
     private final CinemaRepository cinemaRepository;

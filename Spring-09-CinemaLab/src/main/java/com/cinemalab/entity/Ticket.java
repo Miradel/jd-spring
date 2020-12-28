@@ -3,6 +3,7 @@ package com.cinemalab.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -11,6 +12,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
+
 public class Ticket extends BaseEntity {
     @Column(name = "seat_number")
     private Integer seatNumber;
@@ -33,5 +35,14 @@ public class Ticket extends BaseEntity {
         this.seatNumber = seatNumber;
         this.rowNumber = rowNumber;
         this.dateTime = dateTime;
+    }
+
+    @Override
+    public String toString() {
+        return "Ticket{" +
+                "seatNumber=" + seatNumber +
+                ", rowNumber=" + rowNumber +
+                ", dateTime=" + dateTime +
+                '}';
     }
 }

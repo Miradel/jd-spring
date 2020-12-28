@@ -6,6 +6,7 @@ import com.cinemalab.enums.MovieType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -50,5 +51,17 @@ public class Movie extends BaseEntity {
         this.type = type;
         this.state = state;
         this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return "Movie{" +
+                "name='" + name + '\'' +
+                ", releaseDate=" + releaseDate +
+                ", duration=" + duration +
+                ", type=" + type +
+                ", state=" + state +
+                ", price=" + price +
+                '}';
     }
 }
