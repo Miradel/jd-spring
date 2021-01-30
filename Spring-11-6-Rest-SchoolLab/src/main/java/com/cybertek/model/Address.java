@@ -64,6 +64,8 @@ public class Address extends BaseEntity {
 
         return Integer.parseInt(getTemperature.get("temperature").toString());
 
+
+
     }
 
 }
