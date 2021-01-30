@@ -26,6 +26,8 @@ public class Address extends BaseEntity {
     private String city;
 
     @Column(name = "postal_code")
+
+
     private String postalCode;
 
     @Enumerated(EnumType.STRING)
