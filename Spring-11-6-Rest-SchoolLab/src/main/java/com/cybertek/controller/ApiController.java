@@ -37,7 +37,6 @@ public class ApiController {
 
     @GetMapping("/students")
     public ResponseEntity<ResponseWrapper> readAllStudents(){
-
         return ResponseEntity
                 .ok(new ResponseWrapper("Students are successfully retrieved",
                         studentRepository.findAll()));
@@ -62,11 +61,9 @@ public class ApiController {
         if(!foundAddress.isPresent()){
             throw new Exception("Address is not found!");
         }
-
         address.setCurrentTemperature(new Address().consumeTemp(address.getCity()));
         address.setId(foundAddress.get().getId());
-        return address;
-
+        return addressRepository.save(address);
     }
 
 
