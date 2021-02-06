@@ -51,4 +51,7 @@ public interface CinemaRepository extends JpaRepository<Cinema, Long> {
     @Query(value = "SELECT DISTINCT sponsored_name FROM cinema", nativeQuery = true)
     List<String> distinctBYSponsoredName();
 
+    @Query(value = "SELECT count(*) from cinema c JOIN movie_cinema mc on c.id = mc.cinema_id WHERE c.id = ?1", nativeQuery = true)
+    Integer countCinemaNativeQuery(Long id);
+
 }
