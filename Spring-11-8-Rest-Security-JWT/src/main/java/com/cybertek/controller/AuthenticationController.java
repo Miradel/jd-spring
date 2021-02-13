@@ -1,0 +1,86 @@
+package com.cybertek.controller;
+
+import com.cybertek.annotation.DefaultExceptionMessage;
+import com.cybertek.entity.AuthenticationRequest;
+import com.cybertek.entity.ResponseWrapper;
+import com.cybertek.entity.User;
+import com.cybertek.exception.ServiceException;
+import com.cybertek.service.UserService;
+import com.cybertek.util.JWTUtil;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@Tag(name = "Authenticate controller",description = "Authenticate API")
+public class AuthenticationController {
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private JWTUtil jwtUtil;
+
+
+    @PostMapping("/authenticate")
+    @DefaultExceptionMessage(defaultMessage = "Bad Credentials")
+    @Operation(summary = "Login to application")
+    public ResponseEntity<ResponseWrapper> doLogin(@RequestBody AuthenticationRequest authenticationRequest){
+
+        String password = authenticationRequest.getPassword();
+        String username = authenticationRequest.getUsername();
+
+        User foundUser = userService.readByUsername(username);
+
+        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username,password);
+        authenticationManager.authenticate(authenticationToken);
+
+        String jwtToken = jwtUtil.generateToken(foundUser);
+
+        return ResponseEntity.ok(
+                new ResponseWrapper("Login Successfully!",jwtToken));
+
+    }
+
+    @PostMapping("/create-user")
+    @DefaultExceptionMessage(defaultMessage = "Failed to create user, please try again")
+    @Operation(summary = "Create a new user")
+    public ResponseEntity<ResponseWrapper> createAccount(@RequestBody User user) throws ServiceException {
+
+        User createdUser = userService.createUser(user);
+
+        return ResponseEntity.ok(
+                new ResponseWrapper("User has been Created successfully!",createdUser) );
+    }
+
+    @DeleteMapping("/delete-user/{id}")
+    @DefaultExceptionMessage(defaultMessage = "Failed to delete user, please try again")
+    @Operation(summary = "Delete User by Id")
+    public ResponseEntity<ResponseWrapper> deleteAccount(@PathVariable("id") Integer id) throws ServiceException {
+
+        userService.deleteUser(id);
+
+        return ResponseEntity.ok(
+                new ResponseWrapper("User has been Deleted successfully!") );
+    }
+
+    @PutMapping("/update-user/{id}")
+    @DefaultExceptionMessage(defaultMessage = "Failed to update user, please try again")
+    @Operation(summary = "Update User by Id")
+    public ResponseEntity<ResponseWrapper> updateAccount(@PathVariable("id") Integer id, @RequestBody User user) throws ServiceException {
+        User updatedUser = userService.updateUser(id,user);
+        return ResponseEntity.ok(
+                new ResponseWrapper("User has been updated successfully!",updatedUser) );
+    }
+
+
+
+}
