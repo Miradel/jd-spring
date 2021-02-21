@@ -60,6 +60,8 @@ public class ProductController {
         logger.info("After -> Controller:{} - Method:{} - Output Parameters:{}","ProductController","getProducts",list.toString());
 
         return list;
+
+
     }
 
 
